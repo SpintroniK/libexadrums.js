@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/SpintroniK/libexadrums.js/issues"
   },
-  "homepage": "https://github.com/SpintroniK/libexadrums.js#readme"
+  "homepage": "https://github.com/SpintroniK/libexadrums.js#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }
