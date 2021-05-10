@@ -1,0 +1,30 @@
+{
+  "main": "lib/binding.js",
+  "dependencies": {
+    "node-addon-api": "^1.1.0"
+  },
+  "scripts": {
+    "test": "node --napi-modules ./test/test_binding.js",
+    "build": "node-gyp rebuild",
+    "clean": "node-gyp clean"
+  },
+  "gypfile": true,
+  "name": "@exadrums/libexadrums.js",
+  "version": "0.1.0",
+  "description": "Javascript bindings for libexadrums.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpintroniK/libexadrums.js.git"
+  },
+  "keywords": [
+    "Drums",
+    "Drum",
+    "module"
+  ],
+  "author": "Jeremy Oden <jeremoden@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SpintroniK/libexadrums.js/issues"
+  },
+  "homepage": "https://github.com/SpintroniK/libexadrums.js#readme"
+}
