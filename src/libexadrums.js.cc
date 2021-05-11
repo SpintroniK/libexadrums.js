@@ -33,6 +33,13 @@ void LibexadrumsJs::Stop(const Napi::CallbackInfo& info)
     drumKit->Stop();
 }
 
+Napi::Value LibexadrumsJs::IsStarted(const Napi::CallbackInfo& info)
+{
+    Napi::Env env = info.Env();
+    bool isStarted = drumKit->IsStarted();
+    return Napi::Value::From(env, isStarted);
+}
+
 Napi::Value LibexadrumsJs::GetKitsNames(const Napi::CallbackInfo& info)
 {
     Napi::Env env = info.Env();
@@ -52,6 +59,7 @@ Napi::Function LibexadrumsJs::GetClass(Napi::Env env)
     {
         LibexadrumsJs::InstanceMethod("start", &LibexadrumsJs::Start),
         LibexadrumsJs::InstanceMethod("stop", &LibexadrumsJs::Stop),
+        LibexadrumsJs::InstanceMethod("isStarted", &LibexadrumsJs::IsStarted),
         LibexadrumsJs::InstanceMethod("getKitsNames", &LibexadrumsJs::GetKitsNames),
     });
 }

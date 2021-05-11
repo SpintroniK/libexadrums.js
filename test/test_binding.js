@@ -20,10 +20,18 @@ async function testBasic()
 {
     const instance = new LibexadrumsJs(resolveHome('~/.eXaDrums/Data/'))
 
-    assert(instance.start, "The expected method is not defined")
-    instance.start()
-    await sleep(4000)
-    instance.stop()
+    assert(instance.start, "The expected method is not defined.")
+    assert(instance.stop, "The expected method is not defined.")
+    assert(instance.isStarted, "The expected method is not defined.")
+
+    assert.strictEqual(instance.isStarted(), false, "isStarted should return false.")
+    assert.doesNotThrow(_ => instance.start(), undefined, "Error: Start function should not throw.")
+    assert.strictEqual(instance.isStarted(), true, "isStarted should return true.")
+    
+    await sleep(4000) // Let the module run for a short while
+
+    assert.doesNotThrow(_ => instance.stop(), undefined, "Error: Stop function should not throw.")
+    assert.strictEqual(instance.isStarted(), false, "isStarted should return false.")
 
 }
 
@@ -37,5 +45,5 @@ function testInvalidParams()
     await assert.doesNotReject(testBasic, undefined, "testBasic threw an expection")
     assert.throws(testInvalidParams, undefined, "testInvalidParams didn't throw")
 
-    console.log("Tests passed- everything looks OK!")
+    console.log("Tests passed - everything looks OK!")
 })()
