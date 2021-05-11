@@ -18,11 +18,16 @@ function resolveHome(filepath)
 
 async function testBasic()
 {
-    const instance = new LibexadrumsJs(resolveHome('~/.eXaDrums/Data/'))
+    const dataLocation = resolveHome('~/.eXaDrums/Data')
+    const instance = new LibexadrumsJs(dataLocation)
 
+    // Make sure all required methods exist
     assert(instance.start, "The expected method is not defined.")
     assert(instance.stop, "The expected method is not defined.")
     assert(instance.isStarted, "The expected method is not defined.")
+    assert(instance.getDataLocation, "The expected method is not defined.")
+    
+    assert.strictEqual(instance.getDataLocation(), `${dataLocation}/`, "Data Location is wrong.")
 
     assert.strictEqual(instance.isStarted(), false, "isStarted should return false.")
     assert.doesNotThrow(_ => instance.start(), undefined, "Error: Start function should not throw.")

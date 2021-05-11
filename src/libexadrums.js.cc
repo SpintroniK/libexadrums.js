@@ -53,6 +53,11 @@ Napi::Value LibexadrumsJs::GetKitsNames(const Napi::CallbackInfo& info)
     return kitsNamesArray;
 }
 
+Napi::Value LibexadrumsJs::GetDataLocation(const Napi::CallbackInfo& info)
+{
+    return Napi::String::From(info.Env(), drumKit->GetDataLocation());
+}
+
 Napi::Function LibexadrumsJs::GetClass(Napi::Env env) 
 {
     return DefineClass(env, "LibexadrumsJs", 
@@ -60,6 +65,7 @@ Napi::Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("start", &LibexadrumsJs::Start),
         LibexadrumsJs::InstanceMethod("stop", &LibexadrumsJs::Stop),
         LibexadrumsJs::InstanceMethod("isStarted", &LibexadrumsJs::IsStarted),
+        LibexadrumsJs::InstanceMethod("getDataLocation", &LibexadrumsJs::GetDataLocation),
         LibexadrumsJs::InstanceMethod("getKitsNames", &LibexadrumsJs::GetKitsNames),
     });
 }
