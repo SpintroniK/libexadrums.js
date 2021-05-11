@@ -33,12 +33,26 @@ void LibexadrumsJs::Stop(const Napi::CallbackInfo& info)
     drumKit->Stop();
 }
 
+Napi::Value LibexadrumsJs::GetKitsNames(const Napi::CallbackInfo& info)
+{
+    Napi::Env env = info.Env();
+    const auto kitsNames = drumKit->GetKitsNames();
+    auto kitsNamesArray = Napi::Array::New(env, kitsNames.size());
+    for(size_t i = 0; i < kitsNames.size(); ++i)
+    {
+        kitsNamesArray[i] = Napi::String::From(env, kitsNames[i]);
+    }
+
+    return kitsNamesArray;
+}
+
 Napi::Function LibexadrumsJs::GetClass(Napi::Env env) 
 {
     return DefineClass(env, "LibexadrumsJs", 
     {
         LibexadrumsJs::InstanceMethod("start", &LibexadrumsJs::Start),
         LibexadrumsJs::InstanceMethod("stop", &LibexadrumsJs::Stop),
+        LibexadrumsJs::InstanceMethod("getKitsNames", &LibexadrumsJs::GetKitsNames),
     });
 }
 
