@@ -26,14 +26,24 @@ async function testBasic()
     assert(instance.stop, "The expected method is not defined.")
     assert(instance.isStarted, "The expected method is not defined.")
     assert(instance.getDataLocation, "The expected method is not defined.")
+    assert(instance.getVersion, "The expected method is not defined.")
+    assert(instance.enableMetronome, "The expected method is not defined.")
+    assert(instance.changeClickVolume, "The expected method is not defined.")
     
+    // console.log(`libexadrums version = ${instance.getVersion()}`)
+
     assert.strictEqual(instance.getDataLocation(), `${dataLocation}/`, "Data Location is wrong.")
 
     assert.strictEqual(instance.isStarted(), false, "isStarted should return false.")
     assert.doesNotThrow(_ => instance.start(), undefined, "Error: Start function should not throw.")
     assert.strictEqual(instance.isStarted(), true, "isStarted should return true.")
+
+    assert.doesNotThrow(_ => instance.enableMetronome(true), undefined, "enableMetronome should not throw.")
+    assert.doesNotThrow(_ => instance.changeClickVolume(15), undefined, "changeClickVolume should not throw.")
     
-    await sleep(4000) // Let the module run for a short while
+    await sleep(1000) // Let the module run for a short while
+    assert.doesNotThrow(_ => instance.enableMetronome(false), undefined, "enableMetronome should not throw.")
+    await sleep(3000) // Let the module run for a short while
 
     assert.doesNotThrow(_ => instance.stop(), undefined, "Error: Stop function should not throw.")
     assert.strictEqual(instance.isStarted(), false, "isStarted should return false.")

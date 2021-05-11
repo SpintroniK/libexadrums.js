@@ -12,6 +12,9 @@ public:
     void Stop(const Napi::CallbackInfo&);
     Napi::Value IsStarted(const Napi::CallbackInfo&);
     Napi::Value GetDataLocation(const Napi::CallbackInfo&);
+    Napi::Value GetVersion(const Napi::CallbackInfo&);
+    void EnableMetronome(const Napi::CallbackInfo&);
+    void ChangeClickVolume(const Napi::CallbackInfo&);
 
     Napi::Value GetKitsNames(const Napi::CallbackInfo&);
 
