@@ -19,7 +19,8 @@
   "keywords": [
     "Drums",
     "Drum",
-    "module"
+    "module",
+    "node-addon-api"
   ],
   "author": "Jeremy Oden <jeremoden@gmail.com>",
   "license": "MIT",
