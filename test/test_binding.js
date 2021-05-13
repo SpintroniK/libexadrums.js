@@ -43,6 +43,10 @@ async function testBasic()
     
     await sleep(1000) // Let the module run for a short while
     assert.doesNotThrow(_ => instance.enableMetronome(false), undefined, "enableMetronome should not throw.")
+    assert.doesNotThrow(_ => instance.changeTempo(120), undefined, "changeTempo should not throw.")
+    assert.strictEqual(instance.getTempo(), 120, "getTempo() should return 120")
+
+    assert.doesNotThrow(_ => instance.restartMetronome(), undefined, "restartMetronome should not thorw.")
     await sleep(3000) // Let the module run for a short while
 
     assert.doesNotThrow(_ => instance.stop(), undefined, "Error: Stop function should not throw.")

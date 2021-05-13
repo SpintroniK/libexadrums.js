@@ -52,6 +52,18 @@ public:
         drumKit->EnableMetronome(enabled);
     }
 
+    void RestartMetronome(const Napi::CallbackInfo& info)
+    {
+        drumKit->RestartMetronome();
+    }
+
+    void ChangeTempo(const Napi::CallbackInfo& info)
+    {
+        uint32_t tempo{};
+        getArgs(info, tempo);
+        drumKit->ChangeTempo(tempo);
+    }
+
     void ChangeClickVolume(const Napi::CallbackInfo& info)
     {
         uint32_t volume{};
@@ -60,6 +72,11 @@ public:
         drumKit->ChangeClickVolume(volume);
     }
 
+    Napi::Value GetTempo(const Napi::CallbackInfo& info)
+    {
+        uint32_t tempo = drumKit->GetTempo();
+        return Napi::Number::From(info.Env(), tempo);
+    }
 
     Napi::Value GetKitsNames(const Napi::CallbackInfo& info)
     {

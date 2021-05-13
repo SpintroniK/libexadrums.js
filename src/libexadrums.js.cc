@@ -14,7 +14,10 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("getDataLocation", &LibexadrumsJs::GetDataLocation),
         LibexadrumsJs::InstanceMethod("getVersion", &LibexadrumsJs::GetVersion),
         LibexadrumsJs::InstanceMethod("enableMetronome", &LibexadrumsJs::EnableMetronome),
+        LibexadrumsJs::InstanceMethod("restartMetronome", &LibexadrumsJs::RestartMetronome),
+        LibexadrumsJs::InstanceMethod("changeTempo", &LibexadrumsJs::ChangeTempo),
         LibexadrumsJs::InstanceMethod("changeClickVolume", &LibexadrumsJs::ChangeClickVolume),
+        LibexadrumsJs::InstanceMethod("getTempo", &LibexadrumsJs::GetTempo),
         LibexadrumsJs::InstanceMethod("getKitsNames", &LibexadrumsJs::GetKitsNames),
     });
 }
