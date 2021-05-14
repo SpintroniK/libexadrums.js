@@ -95,6 +95,19 @@ public:
         return Napi::Number::From(info.Env(), lastClickTime);
     }
 
+    Napi::Value GetClicksTypes(const Napi::CallbackInfo& info)
+    {
+        Napi::Env env = info.Env();
+        const auto clicksTypes = drumKit->GetClicksTypes();
+        auto clicksTypesArray = Napi::Array::New(env, clicksTypes.size());
+        for(size_t i = 0; i < clicksTypes.size(); ++i)
+        {
+            clicksTypesArray[i] = Napi::String::From(env, clicksTypes[i]);
+        }
+
+        return clicksTypesArray;
+    }
+
     Napi::Value GetKitsNames(const Napi::CallbackInfo& info)
     {
         Napi::Env env = info.Env();

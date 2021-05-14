@@ -40,6 +40,8 @@ async function testBasic()
 
     assert.doesNotThrow(_ => instance.changeTempo(60), undefined, "changeTempo should not throw.")
 
+    assert.strictEqual(instance.getClicksTypes().includes('Sine'), true, "Sine should be returned by getClicksTypes")
+
     assert.doesNotThrow(_ => instance.enableMetronome(true), undefined, "enableMetronome should not throw.")
     assert.doesNotThrow(_ => instance.changeClickVolume(15), undefined, "changeClickVolume should not throw.")
 

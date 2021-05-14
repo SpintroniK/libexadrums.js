@@ -21,6 +21,7 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("saveMetronomeConfig", &LibexadrumsJs::SaveMetronomeConfig),
         LibexadrumsJs::InstanceMethod("getClickPosition", &LibexadrumsJs::GetClickPosition),
         LibexadrumsJs::InstanceMethod("getLastClickTime", &LibexadrumsJs::GetLastClickTime),
+        LibexadrumsJs::InstanceMethod("getClicksTypes", &LibexadrumsJs::GetClicksTypes),
         LibexadrumsJs::InstanceMethod("getKitsNames", &LibexadrumsJs::GetKitsNames),
     });
 }
