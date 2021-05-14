@@ -16,10 +16,8 @@ function resolveHome(filepath)
 }
 
 
-async function testBasic()
+function testDefs()
 {
-    const dataLocation = resolveHome('~/.eXaDrums/Data')
-    const instance = new LibexadrumsJs(dataLocation)
 
     // Make sure all required methods exist
     assert(instance.start, "The expected method is not defined.")
@@ -29,8 +27,14 @@ async function testBasic()
     assert(instance.getVersion, "The expected method is not defined.")
     assert(instance.enableMetronome, "The expected method is not defined.")
     assert(instance.changeClickVolume, "The expected method is not defined.")
-    
-    // console.log(`libexadrums version = ${instance.getVersion()}`)
+}
+
+async function testInit()
+{
+
+    const dataLocation = resolveHome('~/.eXaDrums/Data')
+    const instance = new LibexadrumsJs(dataLocation)
+    console.log(`libexadrums version = ${instance.getVersion()}`)
 
     assert.strictEqual(instance.getDataLocation(), `${dataLocation}/`, "Data Location is wrong.")
 
@@ -38,6 +42,16 @@ async function testBasic()
     assert.doesNotThrow(_ => instance.start(), undefined, "Error: Start function should not throw.")
     assert.strictEqual(instance.isStarted(), true, "isStarted should return true.")
 
+    assert.doesNotThrow(_ => instance.stop(), undefined, "Error: Start function should not throw.")
+}
+
+async function testMetronome()
+{
+
+    const dataLocation = resolveHome('~/.eXaDrums/Data')
+    const instance = new LibexadrumsJs(dataLocation)
+
+    assert.doesNotThrow(_ => instance.start(), undefined, "Error: Start function should not throw.")
     assert.doesNotThrow(_ => instance.changeTempo(60), undefined, "changeTempo should not throw.")
 
     assert.strictEqual(instance.getClicksTypes().includes('Sine'), true, "Sine should be returned by getClicksTypes")
@@ -73,8 +87,9 @@ function testInvalidParams()
 
 (async _=>
 {
-    await assert.doesNotReject(testBasic, undefined, "testBasic threw an expection")
-    assert.throws(testInvalidParams, undefined, "testInvalidParams didn't throw")
+    assert.doesNotThrow(testInit, undefined, "Initialization failed.")
+    await assert.doesNotReject(testMetronome, undefined, "Metronome test failed.")
+    assert.throws(testInvalidParams, undefined, "testInvalidParams didn't throw.")
 
     console.log("Tests passed - everything looks OK!")
 })()
