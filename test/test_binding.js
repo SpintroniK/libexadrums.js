@@ -38,13 +38,23 @@ async function testBasic()
     assert.doesNotThrow(_ => instance.start(), undefined, "Error: Start function should not throw.")
     assert.strictEqual(instance.isStarted(), true, "isStarted should return true.")
 
+    assert.doesNotThrow(_ => instance.changeTempo(60), undefined, "changeTempo should not throw.")
+
     assert.doesNotThrow(_ => instance.enableMetronome(true), undefined, "enableMetronome should not throw.")
     assert.doesNotThrow(_ => instance.changeClickVolume(15), undefined, "changeClickVolume should not throw.")
+
+    const lastClickTime = instance.getLastClickTime()
     
     await sleep(1000) // Let the module run for a short while
+
+    assert.strictEqual(instance.getClickPosition() >= 0., true, "Click position is wrong.")
+    assert.strictEqual(instance.getLastClickTime() > lastClickTime + 100, true, "Last click time value is wrong.")
     assert.doesNotThrow(_ => instance.enableMetronome(false), undefined, "enableMetronome should not throw.")
     assert.doesNotThrow(_ => instance.changeTempo(120), undefined, "changeTempo should not throw.")
     assert.strictEqual(instance.getTempo(), 120, "getTempo() should return 120")
+
+
+    assert.doesNotThrow(_ => instance.saveMetronomeConfig(), undefined, "saveMetronomeConfig should not thow.")
 
     assert.doesNotThrow(_ => instance.restartMetronome(), undefined, "restartMetronome should not thorw.")
     await sleep(3000) // Let the module run for a short while

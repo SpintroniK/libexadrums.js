@@ -78,6 +78,23 @@ public:
         return Napi::Number::From(info.Env(), tempo);
     }
 
+    void SaveMetronomeConfig(const Napi::CallbackInfo& info)
+    {
+        drumKit->SaveMetronomeConfig();
+    }
+    
+    Napi::Value GetClickPosition(const Napi::CallbackInfo& info)
+    {
+        double clickPos = drumKit->GetClickPosition();
+        return Napi::Number::From(info.Env(), clickPos);
+    }
+
+    Napi::Value GetLastClickTime(const Napi::CallbackInfo& info)
+    {
+        int64_t lastClickTime = drumKit->GetLastClickTime();
+        return Napi::Number::From(info.Env(), lastClickTime);
+    }
+
     Napi::Value GetKitsNames(const Napi::CallbackInfo& info)
     {
         Napi::Env env = info.Env();
