@@ -22,6 +22,8 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("getClickPosition", &LibexadrumsJs::GetClickPosition),
         LibexadrumsJs::InstanceMethod("getLastClickTime", &LibexadrumsJs::GetLastClickTime),
         LibexadrumsJs::InstanceMethod("getClicksTypes", &LibexadrumsJs::GetClicksTypes),
+        LibexadrumsJs::InstanceMethod("setClickType", &LibexadrumsJs::SetClickType),
+        LibexadrumsJs::InstanceMethod("getClickTypeId", &LibexadrumsJs::GetClickTypeId),
         LibexadrumsJs::InstanceMethod("getKitsNames", &LibexadrumsJs::GetKitsNames),
     });
 }

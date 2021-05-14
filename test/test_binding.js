@@ -15,25 +15,18 @@ function resolveHome(filepath)
     return filepath;
 }
 
-
-function testDefs()
-{
-
-    // Make sure all required methods exist
-    assert(instance.start, "The expected method is not defined.")
-    assert(instance.stop, "The expected method is not defined.")
-    assert(instance.isStarted, "The expected method is not defined.")
-    assert(instance.getDataLocation, "The expected method is not defined.")
-    assert(instance.getVersion, "The expected method is not defined.")
-    assert(instance.enableMetronome, "The expected method is not defined.")
-    assert(instance.changeClickVolume, "The expected method is not defined.")
-}
-
 async function testInit()
 {
 
     const dataLocation = resolveHome('~/.eXaDrums/Data')
     const instance = new LibexadrumsJs(dataLocation)
+
+    assert(instance.start, "The expected method is not defined.")
+    assert(instance.stop, "The expected method is not defined.")
+    assert(instance.isStarted, "The expected method is not defined.")
+    assert(instance.getDataLocation, "The expected method is not defined.")
+    assert(instance.getVersion, "The expected method is not defined.")
+
     console.log(`libexadrums version = ${instance.getVersion()}`)
 
     assert.strictEqual(instance.getDataLocation(), `${dataLocation}/`, "Data Location is wrong.")
@@ -51,6 +44,11 @@ async function testMetronome()
     const dataLocation = resolveHome('~/.eXaDrums/Data')
     const instance = new LibexadrumsJs(dataLocation)
 
+    assert(instance.enableMetronome, "The expected method is not defined.")
+    assert(instance.changeClickVolume, "The expected method is not defined.")
+
+    assert.doesNotThrow(_ => instance.setClickType(1), undefined, "setClickType should not throw.")
+    assert.strictEqual(instance.getClickTypeId(), 1, "Click type index is wrong.")
     assert.doesNotThrow(_ => instance.start(), undefined, "Error: Start function should not throw.")
     assert.doesNotThrow(_ => instance.changeTempo(60), undefined, "changeTempo should not throw.")
 

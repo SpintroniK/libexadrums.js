@@ -108,6 +108,19 @@ public:
         return clicksTypesArray;
     }
 
+    void SetClickType(const Napi::CallbackInfo& info)
+    {
+        uint32_t clickTypeIndex{};
+        getArgs(info, clickTypeIndex);
+        drumKit->SetClickType(clickTypeIndex); 
+    }
+
+    Napi::Value GetClickTypeId(const Napi::CallbackInfo& info)
+    {
+        uint32_t clickTypeIndex = drumKit->GetClickTypeId();
+        return Napi::Number::From(info.Env(), clickTypeIndex);
+    }
+
     Napi::Value GetKitsNames(const Napi::CallbackInfo& info)
     {
         Napi::Env env = info.Env();
