@@ -52,7 +52,7 @@ async function testMetronome()
     assert.doesNotThrow(_ => instance.start(), undefined, "Error: Start function should not throw.")
     assert.doesNotThrow(_ => instance.changeTempo(60), undefined, "changeTempo should not throw.")
 
-    assert.strictEqual(instance.getClicksTypes().includes('Sine'), true, "Sine should be returned by getClicksTypes")
+    assert.strictEqual(instance.getClicksTypes().includes('Sine'), true, "Sine should be returned by getClicksTypes.")
 
     assert.doesNotThrow(_ => instance.enableMetronome(true), undefined, "enableMetronome should not throw.")
     assert.doesNotThrow(_ => instance.changeClickVolume(15), undefined, "changeClickVolume should not throw.")
@@ -65,12 +65,16 @@ async function testMetronome()
     assert.strictEqual(instance.getLastClickTime() > lastClickTime + 100, true, "Last click time value is wrong.")
     assert.doesNotThrow(_ => instance.enableMetronome(false), undefined, "enableMetronome should not throw.")
     assert.doesNotThrow(_ => instance.changeTempo(120), undefined, "changeTempo should not throw.")
-    assert.strictEqual(instance.getTempo(), 120, "getTempo() should return 120")
+    assert.strictEqual(instance.getTempo(), 120, "getTempo() should return 120.")
+    assert.doesNotThrow(_ => instance.getRhythms(), undefined, "getRhythms should not throw.")
+    assert.strictEqual(instance.getRhythms().length > 0, true, "getRhythms did not return a correct value.")
 
+    assert.doesNotThrow(_ => instance.setRhythm(1), undefined, "setRhythm should not throw.")
+    assert.strictEqual(instance.getRhythm(), 1, "getRhythm should return 1.")
 
     assert.doesNotThrow(_ => instance.saveMetronomeConfig(), undefined, "saveMetronomeConfig should not thow.")
 
-    assert.doesNotThrow(_ => instance.restartMetronome(), undefined, "restartMetronome should not thorw.")
+    assert.doesNotThrow(_ => instance.restartMetronome(), undefined, "restartMetronome should not throw.")
     await sleep(3000) // Let the module run for a short while
 
     assert.doesNotThrow(_ => instance.stop(), undefined, "Error: Stop function should not throw.")

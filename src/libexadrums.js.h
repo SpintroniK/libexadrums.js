@@ -121,6 +121,32 @@ public:
         return Napi::Number::From(info.Env(), clickTypeIndex);
     }
 
+    Napi::Value GetRhythms(const Napi::CallbackInfo& info)
+    {
+        Napi::Env env = info.Env();
+        const auto rythms = drumKit->GetRhythms();
+        auto rythmsArray = Napi::Array::New(env, rythms.size());
+        for(size_t i = 0; i < rythms.size(); ++i)
+        {
+            rythmsArray[i] = Napi::Number::From(env, rythms[i]);
+        }
+
+        return rythmsArray;
+    }
+
+    Napi::Value GetRhythm(const Napi::CallbackInfo& info)
+    {
+        uint32_t currentRythm = drumKit->GetRhythm();
+        return Napi::Number::From(info.Env(), currentRythm);
+    }
+
+    void SetRhythm(const Napi::CallbackInfo& info)
+    {
+        uint32_t rythmIndex{};
+        getArgs(info, rythmIndex);
+        drumKit->SetRhythm(rythmIndex);
+    }
+
     Napi::Value GetKitsNames(const Napi::CallbackInfo& info)
     {
         Napi::Env env = info.Env();

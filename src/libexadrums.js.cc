@@ -24,6 +24,9 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("getClicksTypes", &LibexadrumsJs::GetClicksTypes),
         LibexadrumsJs::InstanceMethod("setClickType", &LibexadrumsJs::SetClickType),
         LibexadrumsJs::InstanceMethod("getClickTypeId", &LibexadrumsJs::GetClickTypeId),
+        LibexadrumsJs::InstanceMethod("getRhythms", &LibexadrumsJs::GetRhythms),
+        LibexadrumsJs::InstanceMethod("getRhythm", &LibexadrumsJs::GetRhythm),
+        LibexadrumsJs::InstanceMethod("setRhythm", &LibexadrumsJs::SetRhythm),
         LibexadrumsJs::InstanceMethod("getKitsNames", &LibexadrumsJs::GetKitsNames),
     });
 }
