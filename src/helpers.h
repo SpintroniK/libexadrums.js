@@ -6,7 +6,7 @@
 
 
 template<class T>
-void checkArgType(const Napi::CallbackInfo& info, size_t index, T& arg)
+inline void checkArgType(const Napi::CallbackInfo& info, size_t index, T& arg)
 {
     const auto& currentArg = info[index];
     index++;
@@ -45,7 +45,7 @@ void checkArgType(const Napi::CallbackInfo& info, size_t index, T& arg)
 
 
 template<class ...T>
-void getArgs(const Napi::CallbackInfo& info, T&... args)
+inline void getArgs(const Napi::CallbackInfo& info, T&... args)
 {
     constexpr std::size_t n = sizeof...(T);
 
@@ -57,4 +57,31 @@ void getArgs(const Napi::CallbackInfo& info, T&... args)
        
     size_t index = 0;
     (checkArgType(info, index, args), ...);
+}
+
+template<class T>
+inline Napi::Value native2Value(const Napi::CallbackInfo& info, const T& native)
+{
+    if constexpr(std::is_same_v<T, int> || std::is_same_v<T, uint32_t>)
+    {
+        return Napi::Number::From(info.Env(), native);
+    }
+
+    if constexpr(std::is_same_v<T, std::string>)
+    {
+        return Napi::String::From(info.Env(), native);
+    }
+}
+
+template<class T>
+inline Napi::Value vector2Array(const Napi::CallbackInfo& info, std::vector<T>&& vec)
+{
+
+    auto array = Napi::Array::New(info.Env(), vec.size());
+    for(size_t i = 0; i < vec.size(); ++i)
+    {
+        array[i] = native2Value(info, vec[i]);
+    }
+
+    return array;
 }
