@@ -97,15 +97,7 @@ public:
 
     Napi::Value GetClicksTypes(const Napi::CallbackInfo& info)
     {
-        Napi::Env env = info.Env();
-        const auto clicksTypes = drumKit->GetClicksTypes();
-        auto clicksTypesArray = Napi::Array::New(env, clicksTypes.size());
-        for(size_t i = 0; i < clicksTypes.size(); ++i)
-        {
-            clicksTypesArray[i] = Napi::String::From(env, clicksTypes[i]);
-        }
-
-        return clicksTypesArray;
+        return vector2Array(info, drumKit->GetClicksTypes());
     }
 
     void SetClickType(const Napi::CallbackInfo& info)
@@ -123,15 +115,7 @@ public:
 
     Napi::Value GetRhythms(const Napi::CallbackInfo& info)
     {
-        Napi::Env env = info.Env();
-        const auto rythms = drumKit->GetRhythms();
-        auto rythmsArray = Napi::Array::New(env, rythms.size());
-        for(size_t i = 0; i < rythms.size(); ++i)
-        {
-            rythmsArray[i] = Napi::Number::From(env, rythms[i]);
-        }
-
-        return rythmsArray;
+        return vector2Array(info, drumKit->GetRhythms());
     }
 
     Napi::Value GetRhythm(const Napi::CallbackInfo& info)
@@ -147,17 +131,14 @@ public:
         drumKit->SetRhythm(rythmIndex);
     }
 
+    Napi::Value GetBpms(const Napi::CallbackInfo& info)
+    {
+        return vector2Array(info, drumKit->GetBpms());
+    }
+
     Napi::Value GetKitsNames(const Napi::CallbackInfo& info)
     {
-        Napi::Env env = info.Env();
-        const auto kitsNames = drumKit->GetKitsNames();
-        auto kitsNamesArray = Napi::Array::New(env, kitsNames.size());
-        for(size_t i = 0; i < kitsNames.size(); ++i)
-        {
-            kitsNamesArray[i] = Napi::String::From(env, kitsNames[i]);
-        }
-
-        return kitsNamesArray;
+        return vector2Array(info, drumKit->GetKitsNames());
     }
 
 
