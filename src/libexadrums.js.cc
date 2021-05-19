@@ -28,6 +28,8 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("getRhythm", &LibexadrumsJs::GetRhythm),
         LibexadrumsJs::InstanceMethod("setRhythm", &LibexadrumsJs::SetRhythm),
         LibexadrumsJs::InstanceMethod("getBpms", &LibexadrumsJs::GetBpms),
+        LibexadrumsJs::InstanceMethod("getBpmeas", &LibexadrumsJs::GetBpmeas),
+        LibexadrumsJs::InstanceMethod("setBpmeas", &LibexadrumsJs::SetBpmeas),
         LibexadrumsJs::InstanceMethod("getKitsNames", &LibexadrumsJs::GetKitsNames),
     });
 }

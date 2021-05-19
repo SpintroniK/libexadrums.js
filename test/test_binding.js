@@ -53,7 +53,9 @@ async function testMetronome()
     assert.doesNotThrow(_ => instance.changeTempo(60), undefined, "changeTempo should not throw.")
 
     assert.strictEqual(instance.getClicksTypes().includes('Sine'), true, "Sine should be returned by getClicksTypes.")
-    // console.log(instance.getBpms())
+    assert.strictEqual(4 in instance.getBpms(), true, "getBpms should contain the value 4.")
+    assert.doesNotThrow(_ => instance.setBpmeas(3), undefined, "setBpmeas should not throw.")
+    assert.strictEqual(instance.getBpmeas(), 3, "getBpmeas should return 3.")
 
     assert.doesNotThrow(_ => instance.enableMetronome(true), undefined, "enableMetronome should not throw.")
     assert.doesNotThrow(_ => instance.changeClickVolume(15), undefined, "changeClickVolume should not throw.")

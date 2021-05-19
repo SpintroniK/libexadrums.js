@@ -136,6 +136,18 @@ public:
         return vector2Array(info, drumKit->GetBpms());
     }
 
+    Napi::Value GetBpmeas(const Napi::CallbackInfo& info)
+    {
+        return Napi::Number::From(info.Env(), drumKit->GetBpmeas());
+    }
+
+    void SetBpmeas(const Napi::CallbackInfo& info)
+    {
+        uint32_t bpmeas{};
+        getArgs(info, bpmeas);
+        drumKit->SetBpmeas(bpmeas);
+    }
+
     Napi::Value GetKitsNames(const Napi::CallbackInfo& info)
     {
         return vector2Array(info, drumKit->GetKitsNames());
