@@ -19,6 +19,9 @@ public:
         this->drumKit = std::make_unique<eXaDrumsApi::eXaDrums>(dataLocation.data());
     }
 
+
+    // MODULE
+
     void Start(const Napi::CallbackInfo& info) 
     {
         drumKit->Start();
@@ -44,6 +47,9 @@ public:
     {
         return Napi::String::From(info.Env(), eXaDrumsApi::eXaDrums::GetVersion());
     }
+
+
+    // METRONOME
 
     void EnableMetronome(const Napi::CallbackInfo& info)
     {
@@ -147,6 +153,9 @@ public:
         getArgs(info, bpmeas);
         drumKit->SetBpmeas(bpmeas);
     }
+
+
+    // KIT
 
     Napi::Value GetKitsNames(const Napi::CallbackInfo& info)
     {

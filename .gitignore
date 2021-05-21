@@ -3,3 +3,6 @@ build
 package-lock.json
 yarn.lock
 .vscode
+Data
+data.zip
+exadrums-data-master

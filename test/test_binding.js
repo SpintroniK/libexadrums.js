@@ -1,6 +1,9 @@
 const LibexadrumsJs = require("../lib/binding.js")
 const assert = require("assert")
 const path = require('path')
+const axios = require('axios')
+const anzip = require('anzip')
+const fs = require('fs').promises
 const os = require('os')
 
 assert(LibexadrumsJs, "The expected module is undefined")
@@ -15,10 +18,13 @@ function resolveHome(filepath)
     return filepath;
 }
 
+
+const gitRepo = 'https://github.com/SpintroniK/exadrums-data/archive/refs/heads/master.zip'
+const dataLocation = resolveHome('./Data')
+
 async function testInit()
 {
 
-    const dataLocation = resolveHome('~/.eXaDrums/Data')
     const instance = new LibexadrumsJs(dataLocation)
 
     assert(instance.start, "The expected method is not defined.")
@@ -41,7 +47,6 @@ async function testInit()
 async function testMetronome()
 {
 
-    const dataLocation = resolveHome('~/.eXaDrums/Data')
     const instance = new LibexadrumsJs(dataLocation)
 
     assert(instance.enableMetronome, "The expected method is not defined.")
@@ -65,7 +70,7 @@ async function testMetronome()
     await sleep(1000) // Let the module run for a short while
 
     assert.strictEqual(instance.getClickPosition() >= 0., true, "Click position is wrong.")
-    assert.strictEqual(instance.getLastClickTime() > lastClickTime + 10, true, "Last click time value is wrong.")
+    assert.strictEqual(instance.getLastClickTime() > lastClickTime, true, "Last click time value is wrong.")
     assert.doesNotThrow(_ => instance.enableMetronome(false), undefined, "enableMetronome should not throw.")
     assert.doesNotThrow(_ => instance.changeTempo(120), undefined, "changeTempo should not throw.")
     assert.strictEqual(instance.getTempo(), 120, "getTempo() should return 120.")
@@ -92,6 +97,29 @@ function testInvalidParams()
 
 (async _=>
 {
+    let dataFolderExists = false
+    try
+    {
+        dataFolderExists = (await fs.stat(dataLocation)).isDirectory()
+    }
+    catch(_)
+    {
+        //
+    }
+
+    if(!dataFolderExists)
+    {
+        console.log('Data folder not found. Downloading from Github repo...')
+        const res = await axios.get(gitRepo, { responseType: 'arraybuffer' })
+        await fs.writeFile('data.zip', res.data)
+
+        console.log('Extracting data folder...')
+        await anzip('data.zip', { outputPath: './', outputContent: false });
+        await fs.rename('exadrums-data-master', dataLocation)
+    }
+
+    console.log('Launching tests...')
+
     assert.doesNotThrow(testInit, undefined, "Initialization failed.")
     await assert.doesNotReject(testMetronome, undefined, "Metronome test failed.")
     assert.throws(testInvalidParams, undefined, "testInvalidParams didn't throw.")
