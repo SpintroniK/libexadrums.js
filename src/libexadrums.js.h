@@ -48,6 +48,32 @@ public:
         return Napi::String::From(info.Env(), eXaDrumsApi::eXaDrums::GetVersion());
     }
 
+    void EnableRecording(const Napi::CallbackInfo& info)
+    {
+        bool enable{};
+        getArgs(info, enable);
+        drumKit->EnableRecording(enable);
+    }
+
+    void RecorderExport(const Napi::CallbackInfo& info)
+    {
+        std::string fileName{};
+        getArgs(info, fileName);
+        drumKit->RecorderExport(fileName);
+    }
+
+    void RecorderExportPCM(const Napi::CallbackInfo& info)
+    {
+        std::string fileName{};
+        getArgs(info, fileName);
+        drumKit->RecorderExportPCM(fileName);
+    }
+
+    void RecorderPurgeTempFile(const Napi::CallbackInfo& info)
+    {
+        drumKit->RecorderPurgeTempFile();
+    }
+
 
     // METRONOME
 

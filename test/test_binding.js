@@ -36,11 +36,23 @@ async function testInit()
     console.log(`libexadrums version = ${instance.getVersion()}`)
 
     assert.strictEqual(instance.getDataLocation(), `${dataLocation}/`, "Data Location is wrong.")
+}
+
+async function testModule()
+{
+    const instance = new LibexadrumsJs(dataLocation)
 
     assert.strictEqual(instance.isStarted(), false, "isStarted should return false.")
     assert.doesNotThrow(_ => instance.start(), undefined, "Error: Start function should not throw.")
     assert.strictEqual(instance.isStarted(), true, "isStarted should return true.")
+    assert.doesNotThrow(_ => instance.enableRecording(true), undefined, "enableRecording should not throw.")
 
+    await sleep(3000)
+
+    assert.doesNotThrow(_ => instance.enableRecording(false), undefined, "enableRecording should not throw.")
+    assert.doesNotThrow(_ => instance.recorderExport('./test.xml', undefined, "recorderExport should not throw."))
+    assert.doesNotThrow(_ => instance.recorderExportPCM('./test.wav', undefined, "recorderExportPCM should not throw."))
+    assert.doesNotThrow(_ => instance.recorderPurgeTempFile(), undefined, "recorderPurgeTempFile should not throw.")
     assert.doesNotThrow(_ => instance.stop(), undefined, "Error: Start function should not throw.")
 }
 
@@ -67,7 +79,7 @@ async function testMetronome()
 
     const lastClickTime = instance.getLastClickTime()
     
-    await sleep(1000) // Let the module run for a short while
+    await sleep(2000) // Let the module run for a short while
 
     assert.strictEqual(instance.getClickPosition() >= 0., true, "Click position is wrong.")
     assert.strictEqual(instance.getLastClickTime() > lastClickTime, true, "Last click time value is wrong.")
@@ -83,7 +95,7 @@ async function testMetronome()
     assert.doesNotThrow(_ => instance.saveMetronomeConfig(), undefined, "saveMetronomeConfig should not thow.")
 
     assert.doesNotThrow(_ => instance.restartMetronome(), undefined, "restartMetronome should not throw.")
-    await sleep(3000) // Let the module run for a short while
+    await sleep(2000) // Let the module run for a short while
 
     assert.doesNotThrow(_ => instance.stop(), undefined, "Error: Stop function should not throw.")
     assert.strictEqual(instance.isStarted(), false, "isStarted should return false.")
@@ -121,6 +133,7 @@ function testInvalidParams()
     console.log('Launching tests...')
 
     assert.doesNotThrow(testInit, undefined, "Initialization failed.")
+    await assert.doesNotReject(testModule, undefined, "Module test failed.")
     await assert.doesNotReject(testMetronome, undefined, "Metronome test failed.")
     assert.throws(testInvalidParams, undefined, "testInvalidParams didn't throw.")
 

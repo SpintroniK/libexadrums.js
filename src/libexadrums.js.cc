@@ -30,6 +30,10 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("getBpms", &LibexadrumsJs::GetBpms),
         LibexadrumsJs::InstanceMethod("getBpmeas", &LibexadrumsJs::GetBpmeas),
         LibexadrumsJs::InstanceMethod("setBpmeas", &LibexadrumsJs::SetBpmeas),
+        LibexadrumsJs::InstanceMethod("enableRecording", &LibexadrumsJs::EnableRecording),
+        LibexadrumsJs::InstanceMethod("recorderExport", &LibexadrumsJs::RecorderExport),
+        LibexadrumsJs::InstanceMethod("recorderExportPCM", &LibexadrumsJs::RecorderExportPCM),
+        LibexadrumsJs::InstanceMethod("recorderPurgeTempFile", &LibexadrumsJs::RecorderPurgeTempFile),
         LibexadrumsJs::InstanceMethod("getKitsNames", &LibexadrumsJs::GetKitsNames),
     });
 }
