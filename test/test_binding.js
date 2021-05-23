@@ -102,6 +102,22 @@ async function testMetronome()
 
 }
 
+function testSensors()
+{
+    const instance = new LibexadrumsJs(dataLocation)
+
+    assert.doesNotThrow(_ => instance.getSensorsResolution(), undefined, "getSensorsResolution should not throw.")
+    assert.doesNotThrow(_ => instance.isSensorVirtual(), undefined, "isSensorVirtual should not throw.")
+    assert.doesNotThrow(_ => instance.isSensorVirtual(), undefined, "isSensorVirtual should not throw.")
+}
+
+function testAudio()
+{
+    const instance = new LibexadrumsJs(dataLocation)
+
+    assert.doesNotThrow(_ => instance.getAudioDeviceName(), undefined, "getAudioDeviceName should not throw.")
+}
+
 function testInvalidParams()
 {
     const instance = new LibexadrumsJs()
@@ -135,6 +151,9 @@ function testInvalidParams()
     assert.doesNotThrow(testInit, undefined, "Initialization failed.")
     await assert.doesNotReject(testModule, undefined, "Module test failed.")
     await assert.doesNotReject(testMetronome, undefined, "Metronome test failed.")
+    assert.doesNotThrow(testSensors, undefined, "Sensors test failed.")
+    assert.doesNotThrow(testAudio, undefined, "Audio test failed.")
+
     assert.throws(testInvalidParams, undefined, "testInvalidParams didn't throw.")
 
     console.log("Tests passed - everything looks OK!")

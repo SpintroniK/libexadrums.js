@@ -34,6 +34,10 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("recorderExport", &LibexadrumsJs::RecorderExport),
         LibexadrumsJs::InstanceMethod("recorderExportPCM", &LibexadrumsJs::RecorderExportPCM),
         LibexadrumsJs::InstanceMethod("recorderPurgeTempFile", &LibexadrumsJs::RecorderPurgeTempFile),
+        LibexadrumsJs::InstanceMethod("getSensorsResolution", &LibexadrumsJs::GetSensorsResolution),
+        LibexadrumsJs::InstanceMethod("isSensorVirtual", &LibexadrumsJs::IsSensorVirtual),
+        LibexadrumsJs::InstanceMethod("isSensorSpi", &LibexadrumsJs::IsSensorSpi),
+        LibexadrumsJs::InstanceMethod("getAudioDeviceName", &LibexadrumsJs::GetAudioDeviceName),
         LibexadrumsJs::InstanceMethod("getKitsNames", &LibexadrumsJs::GetKitsNames),
     });
 }

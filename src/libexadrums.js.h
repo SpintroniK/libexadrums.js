@@ -188,6 +188,30 @@ public:
         return vector2Array(info, drumKit->GetKitsNames());
     }
 
+    // SENSORS
+
+    Napi::Value GetSensorsResolution(const Napi::CallbackInfo& info)
+    {
+        return Napi::Number::From(info.Env(), drumKit->GetSensorsResolution());
+    }
+
+    Napi::Value IsSensorVirtual(const Napi::CallbackInfo& info)
+    {
+        return Napi::Boolean::From(info.Env(), drumKit->IsSensorVirtual());
+    }
+
+    Napi::Value IsSensorSpi(const Napi::CallbackInfo& info)
+    {
+        return Napi::Boolean::From(info.Env(), drumKit->IsSensorSpi());
+    }
+
+    // Sound
+
+    Napi::Value GetAudioDeviceName(const Napi::CallbackInfo& info)
+    {
+        return Napi::String::From(info.Env(), drumKit->GetAudioDeviceName());
+    }
+
 
     static Napi::Function GetClass(Napi::Env);
 
