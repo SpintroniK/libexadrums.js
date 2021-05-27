@@ -62,7 +62,9 @@ inline void getArgs(const Napi::CallbackInfo& info, T&... args)
 template<class T>
 inline Napi::Value native2Value(const Napi::CallbackInfo& info, const T& native)
 {
-    if constexpr(std::is_same_v<T, int> || std::is_same_v<T, uint32_t>)
+    if constexpr(   std::is_same_v<T, int> 
+                 || std::is_same_v<T, uint32_t>
+                 || std::is_same_v<T, size_t>)
     {
         return Napi::Number::From(info.Env(), native);
     }

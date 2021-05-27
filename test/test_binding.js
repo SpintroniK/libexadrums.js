@@ -102,6 +102,17 @@ async function testMetronome()
 
 }
 
+function testKits()
+{
+    const instance = new LibexadrumsJs(dataLocation)
+
+    assert.doesNotThrow(_ => instance.selectKit(0), undefined, "selectKit should not throw.")
+    assert.doesNotThrow(_ => instance.saveKitConfig(0), undefined, "saveKitConfig should not throw.")
+    assert.doesNotThrow(_ => instance.reloadKits(), undefined, "reloadKits should not throw.")
+    assert.strictEqual(instance.getNumKits() >= 0, true, "getNumKits should return a positive number.")
+    assert.strictEqual(instance.getKitDataFileName().split('.').pop(), 'xml', "getKitDataFileName should return a .xml file name.")
+}
+
 function testSensors()
 {
     const instance = new LibexadrumsJs(dataLocation)
@@ -151,6 +162,7 @@ function testInvalidParams()
     assert.doesNotThrow(testInit, undefined, "Initialization failed.")
     await assert.doesNotReject(testModule, undefined, "Module test failed.")
     await assert.doesNotReject(testMetronome, undefined, "Metronome test failed.")
+    assert.doesNotThrow(testKits, undefined, "Kit test failed.")
     assert.doesNotThrow(testSensors, undefined, "Sensors test failed.")
     assert.doesNotThrow(testAudio, undefined, "Audio test failed.")
 

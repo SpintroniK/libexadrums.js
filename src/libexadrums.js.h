@@ -188,6 +188,42 @@ public:
         return vector2Array(info, drumKit->GetKitsNames());
     }
 
+    void SelectKit(const Napi::CallbackInfo& info)
+    {
+        uint32_t index{};
+        getArgs(info, index);
+        drumKit->SelectKit(index);
+    }
+
+    void SaveKitConfig(const Napi::CallbackInfo& info)
+    {
+        uint32_t index{};
+        getArgs(info, index);
+        drumKit->SaveKitConfig(index);
+    }
+
+    void DeleteKit(const Napi::CallbackInfo& info)
+    {
+        uint32_t index{};
+        getArgs(info, index);
+        drumKit->DeleteKit(index);
+    }
+
+    void ReloadKits(const Napi::CallbackInfo& info)
+    {
+        drumKit->ReloadKits();
+    }
+
+    Napi::Value GetNumKits(const Napi::CallbackInfo& info)
+    {
+        return Napi::Number::From(info.Env(), drumKit->GetNumKits());
+    }
+
+    Napi::Value GetKitDataFileName(const Napi::CallbackInfo& info)
+    {
+        return native2Value(info, drumKit->GetKitDataFileName());
+    }
+
     // SENSORS
 
     Napi::Value GetSensorsResolution(const Napi::CallbackInfo& info)
@@ -205,7 +241,7 @@ public:
         return Napi::Boolean::From(info.Env(), drumKit->IsSensorSpi());
     }
 
-    // Sound
+    // AUDIO
 
     Napi::Value GetAudioDeviceName(const Napi::CallbackInfo& info)
     {

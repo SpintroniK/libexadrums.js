@@ -39,6 +39,12 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("isSensorSpi", &LibexadrumsJs::IsSensorSpi),
         LibexadrumsJs::InstanceMethod("getAudioDeviceName", &LibexadrumsJs::GetAudioDeviceName),
         LibexadrumsJs::InstanceMethod("getKitsNames", &LibexadrumsJs::GetKitsNames),
+        LibexadrumsJs::InstanceMethod("selectKit", &LibexadrumsJs::SelectKit),
+        LibexadrumsJs::InstanceMethod("saveKitConfig", &LibexadrumsJs::SaveKitConfig),
+        LibexadrumsJs::InstanceMethod("deleteKit", &LibexadrumsJs::DeleteKit),
+        LibexadrumsJs::InstanceMethod("getNumKits", &LibexadrumsJs::GetNumKits),
+        LibexadrumsJs::InstanceMethod("reloadKits", &LibexadrumsJs::ReloadKits),
+        LibexadrumsJs::InstanceMethod("getKitDataFileName", &LibexadrumsJs::GetKitDataFileName),
     });
 }
 
