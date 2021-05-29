@@ -6,7 +6,7 @@
 
 
 template<class T>
-inline void checkArgType(const Napi::CallbackInfo& info, size_t index, T& arg)
+inline void checkArgType(const Napi::CallbackInfo& info, size_t& index, T& arg)
 {
     const auto& currentArg = info[index];
     index++;
