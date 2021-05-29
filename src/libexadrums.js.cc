@@ -45,6 +45,9 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("getNumKits", &LibexadrumsJs::GetNumKits),
         LibexadrumsJs::InstanceMethod("reloadKits", &LibexadrumsJs::ReloadKits),
         LibexadrumsJs::InstanceMethod("getKitDataFileName", &LibexadrumsJs::GetKitDataFileName),
+        LibexadrumsJs::InstanceMethod("setInstrumentVolume", &LibexadrumsJs::SetInstrumentVolume),
+        LibexadrumsJs::InstanceMethod("getInstrumentVolume", &LibexadrumsJs::GetInstrumentVolume),
+        LibexadrumsJs::InstanceMethod("getInstrumentsNames", &LibexadrumsJs::GetInstrumentsNames),
     });
 }
 

@@ -82,7 +82,7 @@ async function testMetronome()
     await sleep(2000) // Let the module run for a short while
 
     assert.strictEqual(instance.getClickPosition() >= 0., true, "Click position is wrong.")
-    assert.strictEqual(instance.getLastClickTime() > lastClickTime, true, "Last click time value is wrong.")
+    assert.strictEqual(instance.getLastClickTime() > 0, true, "Last click time value is wrong.")
     assert.doesNotThrow(_ => instance.enableMetronome(false), undefined, "enableMetronome should not throw.")
     assert.doesNotThrow(_ => instance.changeTempo(120), undefined, "changeTempo should not throw.")
     assert.strictEqual(instance.getTempo(), 120, "getTempo() should return 120.")
@@ -107,10 +107,14 @@ function testKits()
     const instance = new LibexadrumsJs(dataLocation)
 
     assert.doesNotThrow(_ => instance.selectKit(0), undefined, "selectKit should not throw.")
-    assert.doesNotThrow(_ => instance.saveKitConfig(0), undefined, "saveKitConfig should not throw.")
-    assert.doesNotThrow(_ => instance.reloadKits(), undefined, "reloadKits should not throw.")
     assert.strictEqual(instance.getNumKits() >= 0, true, "getNumKits should return a positive number.")
     assert.strictEqual(instance.getKitDataFileName().split('.').pop(), 'xml', "getKitDataFileName should return a .xml file name.")
+
+    assert.doesNotThrow(_ => instance.setInstrumentVolume(0, 50), undefined, "setInstrumentVolume should not throw.")
+    assert.strictEqual(instance.getInstrumentVolume(0), 50, "setInstrumentVolume should return 50")
+
+    assert.doesNotThrow(_ => instance.saveKitConfig(0), undefined, "saveKitConfig should not throw.")
+    assert.doesNotThrow(_ => instance.reloadKits(), undefined, "reloadKits should not throw.")
 }
 
 function testSensors()

@@ -224,6 +224,27 @@ public:
         return native2Value(info, drumKit->GetKitDataFileName());
     }
 
+    void SetInstrumentVolume(const Napi::CallbackInfo& info)
+    {
+        uint32_t id{};
+        uint32_t volume{};
+        getArgs(info, id, volume);
+
+        drumKit->SetInstrumentVolume(id, volume);
+    }
+
+    Napi::Value GetInstrumentVolume(const Napi::CallbackInfo& info)
+    {
+        uint32_t id{};
+        getArgs(info, id);
+        return native2Value(info, drumKit->GetInstrumentVolume(id));
+    }
+
+    Napi::Value GetInstrumentsNames(const Napi::CallbackInfo& info)
+    {
+        return vector2Array(info, drumKit->GetInstrumentsNames());
+    }
+
     // SENSORS
 
     Napi::Value GetSensorsResolution(const Napi::CallbackInfo& info)
