@@ -31,7 +31,9 @@ inline void checkArgType(const Napi::CallbackInfo& info, size_t& index, T& arg)
         }
     }
 
-    if constexpr(std::is_same_v<ArgType, uint32_t> || std::is_same_v<ArgType, int>)
+    if constexpr(   std::is_same_v<ArgType, uint32_t> 
+                 || std::is_same_v<ArgType, int>
+                 || std::is_same_v<ArgType, int32_t>)
     {
         if(currentArg.IsNumber())
         {
@@ -65,7 +67,9 @@ inline Napi::Value native2Value(const Napi::CallbackInfo& info, const T& native)
     if constexpr(   std::is_same_v<T, int> 
                  || std::is_same_v<T, uint32_t>
                  || std::is_same_v<T, size_t>
-                 || std::is_same_v<T, long long>)
+                 || std::is_same_v<T, long long>
+                 || std::is_same_v<T, short>
+                 || std::is_same_v<T, uint8_t>)
     {
         return Napi::Number::From(info.Env(), native);
     }

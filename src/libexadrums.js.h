@@ -253,6 +253,15 @@ public:
         return vector2Array(info, drumKit->GetInstrumentTriggersIds(instrumentId));
     }
 
+    void SetTriggerSensorValue(const Napi::CallbackInfo& info)
+    {
+        uint32_t id{};
+        uint32_t channel{};
+        int32_t data{};
+        getArgs(info, id, channel, data);
+        drumKit->SetTriggerSensorValue(id, channel, data); 
+    }
+
     // TRIGGERS
 
     Napi::Value GetLastTrigTime(const Napi::CallbackInfo& info)
