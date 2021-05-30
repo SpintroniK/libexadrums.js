@@ -245,6 +245,26 @@ public:
         return vector2Array(info, drumKit->GetInstrumentsNames());
     }
 
+    Napi::Value GetInstrumentTriggersIds(const Napi::CallbackInfo& info)
+    {
+        uint32_t instrumentId{};
+        getArgs(info, instrumentId);
+
+        return vector2Array(info, drumKit->GetInstrumentTriggersIds(instrumentId));
+    }
+
+    // TRIGGERS
+
+    Napi::Value GetLastTrigTime(const Napi::CallbackInfo& info)
+    {
+        return native2Value(info, drumKit->GetLastTrigTime());
+    }
+
+    Napi::Value GetLastTrigValue(const Napi::CallbackInfo& info)
+    {
+        return native2Value(info, drumKit->GetLastTrigValue());
+    }
+
     // SENSORS
 
     Napi::Value GetSensorsResolution(const Napi::CallbackInfo& info)

@@ -48,6 +48,9 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("setInstrumentVolume", &LibexadrumsJs::SetInstrumentVolume),
         LibexadrumsJs::InstanceMethod("getInstrumentVolume", &LibexadrumsJs::GetInstrumentVolume),
         LibexadrumsJs::InstanceMethod("getInstrumentsNames", &LibexadrumsJs::GetInstrumentsNames),
+        LibexadrumsJs::InstanceMethod("getInstrumentTriggersIds", &LibexadrumsJs::GetInstrumentTriggersIds),
+        LibexadrumsJs::InstanceMethod("getLastTrigTime", &LibexadrumsJs::GetLastTrigTime),
+        LibexadrumsJs::InstanceMethod("getLastTrigValue", &LibexadrumsJs::GetLastTrigValue),
     });
 }
 

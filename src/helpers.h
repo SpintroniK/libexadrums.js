@@ -64,7 +64,8 @@ inline Napi::Value native2Value(const Napi::CallbackInfo& info, const T& native)
 {
     if constexpr(   std::is_same_v<T, int> 
                  || std::is_same_v<T, uint32_t>
-                 || std::is_same_v<T, size_t>)
+                 || std::is_same_v<T, size_t>
+                 || std::is_same_v<T, long long>)
     {
         return Napi::Number::From(info.Env(), native);
     }

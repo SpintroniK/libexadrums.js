@@ -112,6 +112,13 @@ function testKits()
 
     assert.doesNotThrow(_ => instance.setInstrumentVolume(0, 50), undefined, "setInstrumentVolume should not throw.")
     assert.strictEqual(instance.getInstrumentVolume(0), 50, "setInstrumentVolume should return 50")
+    assert.strictEqual(instance.getInstrumentsNames().length > 0, true, "getInstrumentsNames should return at least 1 instrument.")
+
+    assert.strictEqual(instance.getInstrumentTriggersIds(0).length > 0, true, "getInstrumentTriggersIds should return at least one trigger.")
+
+    assert.doesNotThrow( _ => instance.getLastTrigTime(), undefined, "getLastTrigTime should not throw.")
+
+    assert.strictEqual(instance.getLastTrigValue() >= 0, true, "getLastTrigValue should return a positive number.")
 
     assert.doesNotThrow(_ => instance.saveKitConfig(0), undefined, "saveKitConfig should not throw.")
     assert.doesNotThrow(_ => instance.reloadKits(), undefined, "reloadKits should not throw.")
