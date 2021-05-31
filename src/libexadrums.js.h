@@ -3,6 +3,7 @@
 #include "helpers.h"
 
 #include <libexadrums/Api/eXaDrums.hpp>
+#include <libexadrums/Api/Config/Config_api.hpp>
 #include <napi.h>
 #include <memory>
 
@@ -17,6 +18,7 @@ public:
         getArgs(info, dataLocation);
 
         this->drumKit = std::make_unique<eXaDrumsApi::eXaDrums>(dataLocation.data());
+        this->config = std::make_unique<eXaDrumsApi::Config>(*this->drumKit.get());
     }
 
 
@@ -298,10 +300,20 @@ public:
         return Napi::String::From(info.Env(), drumKit->GetAudioDeviceName());
     }
 
+    // CONFIG
+
+    // SENSORS
+
+    Napi::Value GetSensorsTypes(const Napi::CallbackInfo& info)
+    {
+        return vector2Array(info, config->GetSensorsTypes());
+    }
+
 
     static Napi::Function GetClass(Napi::Env);
 
 private:
 
     std::unique_ptr<eXaDrumsApi::eXaDrums> drumKit;
+    std::unique_ptr<eXaDrumsApi::Config> config;
 };

@@ -25,6 +25,7 @@ const dataLocation = resolveHome('./Data')
 async function testInit()
 {
 
+    console.log('Init test start.')
     const instance = new LibexadrumsJs(dataLocation)
 
     assert(instance.start, "The expected method is not defined.")
@@ -36,10 +37,14 @@ async function testInit()
     console.log(`libexadrums version = ${instance.getVersion()}`)
 
     assert.strictEqual(instance.getDataLocation(), `${dataLocation}/`, "Data Location is wrong.")
+
+    console.log('Init test done.')
 }
 
 async function testModule()
 {
+
+    console.log('Module test start.')
     const instance = new LibexadrumsJs(dataLocation)
 
     assert.strictEqual(instance.isStarted(), false, "isStarted should return false.")
@@ -54,11 +59,14 @@ async function testModule()
     assert.doesNotThrow(_ => instance.recorderExportPCM('./test.wav', undefined, "recorderExportPCM should not throw."))
     assert.doesNotThrow(_ => instance.recorderPurgeTempFile(), undefined, "recorderPurgeTempFile should not throw.")
     assert.doesNotThrow(_ => instance.stop(), undefined, "Error: Start function should not throw.")
+
+    console.log('Module test done.')
 }
 
 async function testMetronome()
 {
 
+    console.log('Metronome test start.')
     const instance = new LibexadrumsJs(dataLocation)
 
     assert(instance.enableMetronome, "The expected method is not defined.")
@@ -100,10 +108,13 @@ async function testMetronome()
     assert.doesNotThrow(_ => instance.stop(), undefined, "Error: Stop function should not throw.")
     assert.strictEqual(instance.isStarted(), false, "isStarted should return false.")
 
+    console.log('Metronome test done.')
 }
 
 function testKits()
 {
+    console.log('Kits test start.')
+
     const instance = new LibexadrumsJs(dataLocation)
 
     assert.doesNotThrow(_ => instance.selectKit(0), undefined, "selectKit should not throw.")
@@ -122,22 +133,32 @@ function testKits()
 
     assert.doesNotThrow(_ => instance.saveKitConfig(0), undefined, "saveKitConfig should not throw.")
     assert.doesNotThrow(_ => instance.reloadKits(), undefined, "reloadKits should not throw.")
+
+    console.log('Kits test done.')
 }
 
 function testSensors()
 {
+    console.log('Sensors test start.')
+
     const instance = new LibexadrumsJs(dataLocation)
 
     assert.doesNotThrow(_ => instance.getSensorsResolution(), undefined, "getSensorsResolution should not throw.")
     assert.doesNotThrow(_ => instance.isSensorVirtual(), undefined, "isSensorVirtual should not throw.")
     assert.doesNotThrow(_ => instance.isSensorVirtual(), undefined, "isSensorVirtual should not throw.")
+
+    console.log('Sensors test done.')
 }
 
 function testAudio()
 {
+    console.log('Audio test start.')
+
     const instance = new LibexadrumsJs(dataLocation)
 
     assert.doesNotThrow(_ => instance.getAudioDeviceName(), undefined, "getAudioDeviceName should not throw.")
+
+    console.log('Audio test done.')
 }
 
 function testInvalidParams()
@@ -180,4 +201,4 @@ function testInvalidParams()
     assert.throws(testInvalidParams, undefined, "testInvalidParams didn't throw.")
 
     console.log("Tests passed - everything looks OK!")
-})()
+})();

@@ -52,6 +52,9 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("getLastTrigTime", &LibexadrumsJs::GetLastTrigTime),
         LibexadrumsJs::InstanceMethod("getLastTrigValue", &LibexadrumsJs::GetLastTrigValue),
         LibexadrumsJs::InstanceMethod("setTriggerSensorValue", &LibexadrumsJs::SetTriggerSensorValue),
+        // CONFIG
+        LibexadrumsJs::InstanceMethod("getSensorsTypes", &LibexadrumsJs::GetSensorsTypes),
+
     });
 }
 
