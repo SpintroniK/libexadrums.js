@@ -309,6 +309,21 @@ public:
         return vector2Array(info, config->GetSensorsTypes());
     }
 
+    Napi::Value GetTriggersTypes(const Napi::CallbackInfo& info)
+    {
+        return vector2Array(info, config->GetTriggersTypes());
+    }
+
+    Napi::Value GetTriggersResponses(const Napi::CallbackInfo& info)
+    {
+        return vector2Array(info, config->GetTriggersResponses());
+    }
+
+    Napi::Value GetAudioDevicesNames(const Napi::CallbackInfo& info)
+    {
+        return vector2Array(info, config->GetAudioDevicesNames());
+    }
+
 
     static Napi::Function GetClass(Napi::Env);
 

@@ -54,6 +54,9 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("setTriggerSensorValue", &LibexadrumsJs::SetTriggerSensorValue),
         // CONFIG
         LibexadrumsJs::InstanceMethod("getSensorsTypes", &LibexadrumsJs::GetSensorsTypes),
+        LibexadrumsJs::InstanceMethod("getTriggersTypes", &LibexadrumsJs::GetTriggersTypes),
+        LibexadrumsJs::InstanceMethod("getTriggersResponses", &LibexadrumsJs::GetTriggersResponses),
+        LibexadrumsJs::InstanceMethod("getAudioDevicesNames", &LibexadrumsJs::GetAudioDevicesNames),
 
     });
 }

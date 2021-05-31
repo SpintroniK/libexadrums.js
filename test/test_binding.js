@@ -161,6 +161,21 @@ function testAudio()
     console.log('Audio test done.')
 }
 
+function testConfig()
+{
+    console.log('Config test start.')
+
+    const instance = new LibexadrumsJs(dataLocation)
+
+    assert.strictEqual(instance.config.getSensorsTypes().includes('Virtual'), true, "getSensorsTypes should contain 'Virtual'.")
+    assert.strictEqual(instance.config.getTriggersTypes().includes('Discrete'), true, "getTriggersTypes should contain 'Discrete'.")
+
+    assert.strictEqual(instance.config.getTriggersResponses().includes('Linear'), true, "getTriggersResponses should contain 'Linear'.")
+    assert.strictEqual(instance.config.getAudioDevicesNames().length > 0, true, "getAudioDevicesNames should return at least one result.")
+
+    console.log('Config test done.')
+}
+
 function testInvalidParams()
 {
     const instance = new LibexadrumsJs()
@@ -197,6 +212,7 @@ function testInvalidParams()
     assert.doesNotThrow(testKits, undefined, "Kit test failed.")
     assert.doesNotThrow(testSensors, undefined, "Sensors test failed.")
     assert.doesNotThrow(testAudio, undefined, "Audio test failed.")
+    assert.doesNotThrow(testConfig, undefined, "Config test failed.")
 
     assert.throws(testInvalidParams, undefined, "testInvalidParams didn't throw.")
 
