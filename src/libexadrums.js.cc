@@ -57,6 +57,7 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("getTriggersTypes", &LibexadrumsJs::GetTriggersTypes),
         LibexadrumsJs::InstanceMethod("getTriggersResponses", &LibexadrumsJs::GetTriggersResponses),
         LibexadrumsJs::InstanceMethod("getAudioDevicesNames", &LibexadrumsJs::GetAudioDevicesNames),
+        LibexadrumsJs::InstanceMethod("getTriggersParameters", &LibexadrumsJs::GetTriggersParameters),
 
     });
 }

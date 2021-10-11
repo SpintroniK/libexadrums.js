@@ -26,7 +26,7 @@ async function testInit()
 {
 
     console.log('Init test start.')
-    const instance = new LibexadrumsJs(dataLocation)
+    const instance = new LibexadrumsJs.Exadrums(dataLocation)
 
     assert(instance.start, "The expected method is not defined.")
     assert(instance.stop, "The expected method is not defined.")
@@ -45,7 +45,10 @@ async function testModule()
 {
 
     console.log('Module test start.')
-    const instance = new LibexadrumsJs(dataLocation)
+    const instance = new LibexadrumsJs.Exadrums(dataLocation)
+    const triggersParameters = instance.config.getTriggersParameters();
+
+    console.log(triggersParameters)
 
     assert.strictEqual(instance.isStarted(), false, "isStarted should return false.")
     assert.doesNotThrow(_ => instance.start(), undefined, "Error: Start function should not throw.")
@@ -67,7 +70,7 @@ async function testMetronome()
 {
 
     console.log('Metronome test start.')
-    const instance = new LibexadrumsJs(dataLocation)
+    const instance = new LibexadrumsJs.Exadrums(dataLocation)
 
     assert(instance.enableMetronome, "The expected method is not defined.")
     assert(instance.changeClickVolume, "The expected method is not defined.")
@@ -115,7 +118,7 @@ function testKits()
 {
     console.log('Kits test start.')
 
-    const instance = new LibexadrumsJs(dataLocation)
+    const instance = new LibexadrumsJs.Exadrums(dataLocation)
 
     assert.doesNotThrow(_ => instance.selectKit(0), undefined, "selectKit should not throw.")
     assert.strictEqual(instance.getNumKits() >= 0, true, "getNumKits should return a positive number.")
@@ -141,7 +144,7 @@ function testSensors()
 {
     console.log('Sensors test start.')
 
-    const instance = new LibexadrumsJs(dataLocation)
+    const instance = new LibexadrumsJs.Exadrums(dataLocation)
 
     assert.doesNotThrow(_ => instance.getSensorsResolution(), undefined, "getSensorsResolution should not throw.")
     assert.doesNotThrow(_ => instance.isSensorVirtual(), undefined, "isSensorVirtual should not throw.")
@@ -154,7 +157,7 @@ function testAudio()
 {
     console.log('Audio test start.')
 
-    const instance = new LibexadrumsJs(dataLocation)
+    const instance = new LibexadrumsJs.Exadrums(dataLocation)
 
     assert.doesNotThrow(_ => instance.getAudioDeviceName(), undefined, "getAudioDeviceName should not throw.")
 
@@ -165,7 +168,7 @@ function testConfig()
 {
     console.log('Config test start.')
 
-    const instance = new LibexadrumsJs(dataLocation)
+    const instance = new LibexadrumsJs.Exadrums(dataLocation)
 
     assert.strictEqual(instance.config.getSensorsTypes().includes('Virtual'), true, "getSensorsTypes should contain 'Virtual'.")
     assert.strictEqual(instance.config.getTriggersTypes().includes('Discrete'), true, "getTriggersTypes should contain 'Discrete'.")
@@ -178,7 +181,7 @@ function testConfig()
 
 function testInvalidParams()
 {
-    const instance = new LibexadrumsJs()
+    const instance = new LibexadrumsJs.Exadrums()
 }
 
 (async _=>

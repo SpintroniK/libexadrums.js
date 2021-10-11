@@ -324,6 +324,31 @@ public:
         return vector2Array(info, config->GetAudioDevicesNames());
     }
 
+    // TRIGGERS
+
+    Napi::Value GetTriggersParameters(const Napi::CallbackInfo& info)
+    {
+        const auto triggersParameters = config->GetTriggersParameters();
+        auto out = Napi::Array::New(info.Env(), triggersParameters.size());
+
+        for(size_t i = 0; i < triggersParameters.size(); ++i)
+        {
+            auto obj = Napi::Object::New(info.Env());
+
+            obj["sensorId"] = triggersParameters[i].sensorId;
+            obj["scanTime"] = triggersParameters[i].scanTime;
+            obj["threshold"] = triggersParameters[i].threshold;
+            obj["maskTime"] = triggersParameters[i].maskTime;
+            obj["gain"] = triggersParameters[i].gain;
+            obj["type"] = Napi::String::From(info.Env(), triggersParameters[i].type);
+            obj["response"] = Napi::String::From(info.Env(), triggersParameters[i].response);
+
+            out[i] = obj;
+        }
+
+        return out;
+    }
+
 
     static Napi::Function GetClass(Napi::Env);
 
