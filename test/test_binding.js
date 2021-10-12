@@ -46,9 +46,6 @@ async function testModule()
 
     console.log('Module test start.')
     const instance = new LibexadrumsJs.Exadrums(dataLocation)
-    const triggersParameters = instance.config.getTriggersParameters();
-
-    console.log(triggersParameters)
 
     assert.strictEqual(instance.isStarted(), false, "isStarted should return false.")
     assert.doesNotThrow(_ => instance.start(), undefined, "Error: Start function should not throw.")
