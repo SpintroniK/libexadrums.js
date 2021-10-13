@@ -304,6 +304,16 @@ public:
 
     // SENSORS
 
+    void RefreshSensorsConfig(const Napi::CallbackInfo& info)
+    {
+        return config->RefreshSensorsConfig();
+    }
+
+    void SaveSensorsConfig(const Napi::CallbackInfo& info)
+    {
+        return config->SaveSensorsConfig();
+    }
+
     Napi::Value GetSensorsTypes(const Napi::CallbackInfo& info)
     {
         return vector2Array(info, config->GetSensorsTypes());
@@ -347,6 +357,24 @@ public:
         }
 
         return out;
+    }
+
+    // AUDIO
+    
+    Napi::Value GetAudioDeviceParams(const Napi::CallbackInfo& info)
+    {
+        const auto alsaParameters = config->GetAudioDeviceParams();
+        auto obj = Napi::Object::New(info.Env());
+
+        obj["capture"] = alsaParameters.capture;
+        obj["sampleRate"] = alsaParameters.sampleRate;
+        obj["nChannels"] = alsaParameters.nChannels;
+        obj["bufferTime"] = alsaParameters.bufferTime;
+        obj["periodTime"] = alsaParameters.periodTime;
+
+        obj["device"] = alsaParameters.device;
+
+        return obj;
     }
 
 
