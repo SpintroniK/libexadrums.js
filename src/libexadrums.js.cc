@@ -55,6 +55,7 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         // CONFIG
         LibexadrumsJs::InstanceMethod("refreshSensorsConfig", &LibexadrumsJs::RefreshSensorsConfig),
         LibexadrumsJs::InstanceMethod("saveSensorsConfig", &LibexadrumsJs::SaveSensorsConfig),
+        LibexadrumsJs::InstanceMethod("saveTriggersConfig", &LibexadrumsJs::SaveTriggersConfig),
         LibexadrumsJs::InstanceMethod("getSensorsTypes", &LibexadrumsJs::GetSensorsTypes),
         LibexadrumsJs::InstanceMethod("getTriggersTypes", &LibexadrumsJs::GetTriggersTypes),
         LibexadrumsJs::InstanceMethod("getTriggersResponses", &LibexadrumsJs::GetTriggersResponses),

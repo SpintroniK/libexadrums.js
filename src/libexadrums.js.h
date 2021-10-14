@@ -314,6 +314,11 @@ public:
         return config->SaveSensorsConfig();
     }
 
+    void SaveTriggersConfig(const Napi::CallbackInfo& info)
+    {
+        return config->SaveTriggersConfig();
+    }
+
     Napi::Value GetSensorsTypes(const Napi::CallbackInfo& info)
     {
         return vector2Array(info, config->GetSensorsTypes());
