@@ -4,6 +4,7 @@
 
 #include <libexadrums/Api/eXaDrums.hpp>
 #include <libexadrums/Api/Config/Config_api.hpp>
+#include <libexadrums/Api/Config/AlsaParams_api.h>
 #include <napi.h>
 #include <memory>
 
@@ -313,12 +314,6 @@ public:
     {
         return config->SaveSensorsConfig();
     }
-
-    void SaveTriggersConfig(const Napi::CallbackInfo& info)
-    {
-        return config->SaveTriggersConfig();
-    }
-
     Napi::Value GetSensorsTypes(const Napi::CallbackInfo& info)
     {
         return vector2Array(info, config->GetSensorsTypes());
@@ -340,6 +335,16 @@ public:
     }
 
     // TRIGGERS
+
+    void SaveTriggersConfig(const Napi::CallbackInfo& info)
+    {
+        return config->SaveTriggersConfig();
+    }
+
+    void LoadTriggersConfig(const Napi::CallbackInfo& info)
+    {
+        return config->LoadTriggersConfig();
+    }
 
     Napi::Value GetTriggersParameters(const Napi::CallbackInfo& info)
     {
@@ -365,6 +370,34 @@ public:
     }
 
     // AUDIO
+
+    void SaveCurrentAudioDeviceConfig(const Napi::CallbackInfo& info)
+    {
+        return config->SaveCurrentAudioDeviceConfig();
+    }
+
+    void SaveAudioDeviceConfig(const Napi::CallbackInfo& info)
+    {
+        if(info.Length() != 1)
+        {
+            return;
+        }
+
+        const auto params = info[0].As<Napi::Object>();
+        eXaDrumsApi::AlsaParamsApi nativeParams{};
+        
+        nativeParams.capture = params["capture"].As<Napi::Boolean>().Value();
+        nativeParams.sampleRate = params["sampleRate"].As<Napi::Number>().Uint32Value();
+        nativeParams.nChannels = params["nChannels"].As<Napi::Number>().Uint32Value();
+        nativeParams.bufferTime = params["bufferTime"].As<Napi::Number>().Uint32Value();
+        nativeParams.periodTime = params["periodTime"].As<Napi::Number>().Uint32Value();
+        
+        const auto device = params["device"].As<Napi::String>().Utf8Value();
+
+        std::snprintf(nativeParams.device, sizeof nativeParams.device, "%s", device.data());
+
+        return config->SaveAudioDeviceConfig(nativeParams);        
+    }
     
     Napi::Value GetAudioDeviceParams(const Napi::CallbackInfo& info)
     {

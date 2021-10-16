@@ -56,12 +56,15 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("refreshSensorsConfig", &LibexadrumsJs::RefreshSensorsConfig),
         LibexadrumsJs::InstanceMethod("saveSensorsConfig", &LibexadrumsJs::SaveSensorsConfig),
         LibexadrumsJs::InstanceMethod("saveTriggersConfig", &LibexadrumsJs::SaveTriggersConfig),
+        LibexadrumsJs::InstanceMethod("loadTriggersConfig", &LibexadrumsJs::LoadTriggersConfig),
         LibexadrumsJs::InstanceMethod("getSensorsTypes", &LibexadrumsJs::GetSensorsTypes),
         LibexadrumsJs::InstanceMethod("getTriggersTypes", &LibexadrumsJs::GetTriggersTypes),
         LibexadrumsJs::InstanceMethod("getTriggersResponses", &LibexadrumsJs::GetTriggersResponses),
         LibexadrumsJs::InstanceMethod("getAudioDevicesNames", &LibexadrumsJs::GetAudioDevicesNames),
         LibexadrumsJs::InstanceMethod("getTriggersParameters", &LibexadrumsJs::GetTriggersParameters),
         LibexadrumsJs::InstanceMethod("getAudioDeviceParams", &LibexadrumsJs::GetAudioDeviceParams),
+        LibexadrumsJs::InstanceMethod("saveCurrentAudioDeviceConfig", &LibexadrumsJs::SaveCurrentAudioDeviceConfig),
+        LibexadrumsJs::InstanceMethod("saveAudioDeviceConfig", &LibexadrumsJs::SaveAudioDeviceConfig),
 
     });
 }
