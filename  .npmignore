@@ -1,9 +1,11 @@
-node_modules
-lib/binding
 build
 test
 *.tgz
 npm-debug.log
-.npmignore
 .gitignore
 .travis.yml
+Data
+data.zip
+exadrums-data-master
+test.xml
+test.wav
