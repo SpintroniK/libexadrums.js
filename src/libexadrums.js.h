@@ -415,6 +415,29 @@ public:
         return obj;
     }
 
+    void ResetAudioDevice(const Napi::CallbackInfo& info)
+    {
+        return config->ResetAudioDevice();
+    }
+    
+    void ExportConfig(const Napi::CallbackInfo& info)
+    {
+        std::string configDir{};
+        std::string outputFileName{};
+        getArgs(info, configDir, outputFileName);
+
+        return eXaDrumsApi::Config::ExportConfig(configDir, outputFileName);
+    }
+
+    void ImportConfig(const Napi::CallbackInfo& info)
+    {
+        std::string configFile{};
+        std::string outputConfigDir{};
+        bool replace{};
+        getArgs(info, configFile, outputConfigDir, replace);
+
+        return eXaDrumsApi::Config::ImportConfig(configFile, outputConfigDir, replace);
+    }
 
     static Napi::Function GetClass(Napi::Env);
 

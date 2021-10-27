@@ -65,6 +65,9 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("getAudioDeviceParams", &LibexadrumsJs::GetAudioDeviceParams),
         LibexadrumsJs::InstanceMethod("saveCurrentAudioDeviceConfig", &LibexadrumsJs::SaveCurrentAudioDeviceConfig),
         LibexadrumsJs::InstanceMethod("saveAudioDeviceConfig", &LibexadrumsJs::SaveAudioDeviceConfig),
+        LibexadrumsJs::InstanceMethod("resetAudioDevice", &LibexadrumsJs::ResetAudioDevice),
+        LibexadrumsJs::InstanceMethod("doExport", &LibexadrumsJs::ExportConfig),
+        LibexadrumsJs::InstanceMethod("doImport", &LibexadrumsJs::ImportConfig),
 
     });
 }
