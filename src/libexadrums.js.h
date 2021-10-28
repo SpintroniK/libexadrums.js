@@ -439,6 +439,40 @@ public:
         return eXaDrumsApi::Config::ImportConfig(configFile, outputConfigDir, replace);
     }
 
+    void AddTrigger(const Napi::CallbackInfo& info)
+    {
+        const auto params = info[0].As<Napi::Object>();
+        eXaDrumsApi::TriggerParameters triggerParameters;
+
+        triggerParameters.sensorId = params["sensorId"].As<Napi::Number>().Int32Value();
+        triggerParameters.scanTime = params["scanTime"].As<Napi::Number>().Uint32Value();
+        triggerParameters.threshold = params["threshold"].As<Napi::Number>().Int32Value();
+        triggerParameters.maskTime = params["maskTime"].As<Napi::Number>().Int32Value();
+        triggerParameters.gain = params["gain"].As<Napi::Number>().DoubleValue();
+        
+        const auto type = params["type"].As<Napi::String>().Utf8Value();
+        std::snprintf(triggerParameters.type, sizeof triggerParameters.type, "%s", type.data());
+
+        const auto response = params["response"].As<Napi::String>().Utf8Value();
+        std::snprintf(triggerParameters.response, sizeof triggerParameters.response, "%s", response.data());
+
+        return config->AddTrigger(triggerParameters);
+    }
+
+    void DeleteTrigger(const Napi::CallbackInfo& info)
+    {
+        int sensorId{};
+        getArgs(info, sensorId);
+        return config->DeleteTrigger(sensorId);
+    }
+    
+    Napi::Value GetNbTriggers(const Napi::CallbackInfo& info)
+    {
+        return Napi::Number::From(info.Env(), config->GetNbTriggers());
+    }
+
+
+
     static Napi::Function GetClass(Napi::Env);
 
 private:

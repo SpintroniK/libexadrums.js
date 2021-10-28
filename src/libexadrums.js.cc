@@ -68,6 +68,9 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("resetAudioDevice", &LibexadrumsJs::ResetAudioDevice),
         LibexadrumsJs::InstanceMethod("doExport", &LibexadrumsJs::ExportConfig),
         LibexadrumsJs::InstanceMethod("doImport", &LibexadrumsJs::ImportConfig),
+        LibexadrumsJs::InstanceMethod("addTrigger", &LibexadrumsJs::AddTrigger),
+        LibexadrumsJs::InstanceMethod("deleteTrigger", &LibexadrumsJs::DeleteTrigger),
+        LibexadrumsJs::InstanceMethod("getNbTriggers", &LibexadrumsJs::GetNbTriggers),
 
     });
 }
