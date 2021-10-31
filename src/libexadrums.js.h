@@ -471,7 +471,35 @@ public:
         return Napi::Number::From(info.Env(), config->GetNbTriggers());
     }
 
+    void SetSensorsSamplingRate(const Napi::CallbackInfo& info)
+    {
+        int sampleRate{};
+        getArgs(info, sampleRate);
+        return config->SetSensorsSamplingRate(sampleRate);
+    }
 
+    void SetSensorsResolution(const Napi::CallbackInfo& info)
+    {
+        int resolution{};
+        getArgs(info, resolution);
+        return config->SetSensorsResolution(resolution);
+    }
+
+    void SetSensorsType(const Napi::CallbackInfo& info)
+    {
+        std::string type{};
+        getArgs(info, type);
+        return config->SetSensorsType(type);
+    }
+
+    void SetSensorsDataFolder(const Napi::CallbackInfo& info)
+    {
+        std::string folder{};
+        getArgs(info, folder);
+        return config->SetSensorsDataFolder(folder);
+    }
+
+    
 
     static Napi::Function GetClass(Napi::Env);
 

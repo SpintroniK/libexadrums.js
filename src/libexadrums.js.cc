@@ -71,6 +71,10 @@ Function LibexadrumsJs::GetClass(Napi::Env env)
         LibexadrumsJs::InstanceMethod("addTrigger", &LibexadrumsJs::AddTrigger),
         LibexadrumsJs::InstanceMethod("deleteTrigger", &LibexadrumsJs::DeleteTrigger),
         LibexadrumsJs::InstanceMethod("getNbTriggers", &LibexadrumsJs::GetNbTriggers),
+        LibexadrumsJs::InstanceMethod("setSensorsSamplingRate", &LibexadrumsJs::SetSensorsSamplingRate),
+        LibexadrumsJs::InstanceMethod("setSensorsResolution", &LibexadrumsJs::SetSensorsResolution),
+        LibexadrumsJs::InstanceMethod("setSensorsType", &LibexadrumsJs::SetSensorsType),
+        LibexadrumsJs::InstanceMethod("setSensorsDataFolder", &LibexadrumsJs::SetSensorsDataFolder),
 
     });
 }
